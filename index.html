@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Self-introduction</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/moon.css">
@@ -24,18 +24,16 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-markdown>
-				  # Self-introduction
-				</section>
-				<section data-markdown>
-				  ## info
-				  | KEY | VALUE |
-				  | :--- | :--- |
-				  | Name | 鈴木 徹 |
-				  | Birthday | 1989.04.12 |
-				  | Twitter | [loasnir](https://twitter.com/loasnir), [tree_suzuki](https://twitter.com/tree_suzuki) |
-				  | Github | [loasnir](https://github.com/loasnir) |
-				</section>
+				<section><section data-markdown='/pages/index.md'></section></section>
+				<section><section data-markdown='/pages/info.md'></section></section>
+				<section><section data-markdown='/pages/desc.md'></section></section>
+				<section><section data-markdown='/pages/skill.md'></section></section>
+				<section><section data-markdown='/pages/product/index.md'></section></section>
+				<section><section data-markdown='/pages/product/danahon.md'></section></section>
+				<section><section data-markdown='/pages/business_history/index.md'></section></section>
+				<section><section data-markdown='/pages/business_history/nskint.md'></section></section>
+				<section><section data-markdown='/pages/business_history/maplesystems.md'></section></section>
+				<section data-markdown># END</section>
 			</div>
 		</div>
 
@@ -47,6 +45,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+			  transition: 'convex',
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
