@@ -1,0 +1,24 @@
+{
+  "name": "info",
+  "version": "1.0.0",
+  "description": "my info",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start --server --files '**/*'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loasnir/info.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loasnir/info/issues"
+  },
+  "homepage": "https://github.com/loasnir/info#readme",
+  "devDependencies": {
+    "browser-sync": "^2.24.4"
+  }
+}
