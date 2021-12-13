@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    image: app
+    build:
+      context: .
+      dockerfile: ./packages/docker/app/Dockerfile
+    command: bundle exec jekyll serve --host 0.0.0.0 --port 4000 -l
+    ports:
+      - 4000:4000
+      - 35729:35729
+    volumes:
+      - ./packages/app:/app
+      - app_bundle:/usr/local/bundle
+
+volumes:
+  app_bundle:
