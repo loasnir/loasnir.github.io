@@ -1,14 +1,18 @@
-FROM ruby:2.6-buster
+FROM node:22-slim AS builder
 
-WORKDIR /app
+# install git to install plugins
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-RUN gem install bundler:2.1.4
+WORKDIR /usr/src/app
+COPY package.json .
+COPY package-lock.json* .
+COPY .npmrc* .
+COPY quartz/ ./quartz/
+COPY quartz.lock.json* .
+RUN npm install; npx quartz plugin install
 
-EXPOSE 4000
-EXPOSE 35729
-
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-COPY entrypoint.sh /app/entrypoint.sh
-
-ENTRYPOINT [ "/app/entrypoint.sh" ]
+FROM node:22-slim
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app/ /usr/src/app/
+COPY . .
+CMD ["npx", "quartz", "build", "--serve"]
