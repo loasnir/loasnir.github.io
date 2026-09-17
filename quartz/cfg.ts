@@ -71,6 +71,11 @@ export interface GlobalConfiguration {
    *   Quartz will avoid using this as much as possible and use relative URLs most of the time
    */
   baseUrl?: string
+  /** Emit `<meta name="robots" content="noindex, nofollow">` on every page.
+   *   robots.txt の Disallow は使わない。クローラーがページ本体を読めなくなり、
+   *   noindex も読めないためインデックス済みのページが消えない
+   */
+  noindex?: boolean
   theme: Theme
   /**
    * Allow to translate the date in the language of your choice.

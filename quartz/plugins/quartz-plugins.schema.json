@@ -39,6 +39,10 @@
           "type": "string",
           "description": "Base URL for the site"
         },
+        "noindex": {
+          "type": "boolean",
+          "description": "Emit <meta name=\"robots\" content=\"noindex, nofollow\"> on every page"
+        },
         "theme": {
           "type": "object",
           "required": ["fontOrigin", "cdnCaching", "typography", "colors"],
