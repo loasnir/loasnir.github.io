@@ -14,4 +14,4 @@ tags:
 - **データ分析**: SQL を使った分析（分析関数を用いた複雑な分析含む）、Redash。
 - **AI 活用**: Amazon Bedrock（Converse API + Tool Use、AgentCore Runtime）を用いた業務 Bot の設計・実装・本番運用。Claude Code／Devin／MCP を実運用で回す経験。単なるツール利用ではなく、業務プロセス再設計を伴う AI 導入を実装。
 
-関連: [[management-skills|マネジメントスキル詳細]] / [[development-focus|開発で注力してきたこと]]
+関連: [[management-skills|マネジメントスキル詳細]] / [[focus|注力してきたこと]]

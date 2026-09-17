@@ -16,4 +16,4 @@ tags:
 
 エンジニアリングマネジメント / テックリード / スクラムマスター / SRE / **FDE（Forward Deployed Engineer）** / **イネイブリング** / **AI ガバナンス** / 採用・評価制度設計
 
-関連: [[tech-skills|技術スキル詳細]] / [[management-focus|マネジメントで注力してきたこと]]
+関連: [[tech-skills|技術スキル詳細]] / [[focus|注力してきたこと]]

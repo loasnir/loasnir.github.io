@@ -10,7 +10,8 @@ title: しろへび工房
 
 ## ページ
 
-- スタンス: [[values|自身が大切にしているスタンス]] / [[policy|信念やポリシー]] / [[management-focus|マネジメントで注力してきたこと]] / [[development-focus|開発で注力してきたこと]]
-- スキル: [[tech-skills|技術スキル詳細]] / [[management-skills|マネジメントスキル詳細]]
-- [[resume|履歴書]]
-- [[updates|最近の更新]]
+- [[career/index|職務経歴]]: これまでの在籍先と担ってきた役割
+- [[topics/index|トピック]]: 繰り返し考えているテーマ
+- [[stance/index|スタンス]]: 仕事で大切にしている考え方
+- [[skills/index|スキル]]: 技術・マネジメントのスキル詳細
+- [[notes/index|ノート]]: 日々の記録や覚え書き
