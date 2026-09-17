@@ -67,6 +67,6 @@ tags:
 - サーバーサイド: PHP（Laravel / CakePHP）、Ruby、TypeScript / Node.js
 - フロントエンド: React / TypeScript
 - インフラ: AWS（VPC Peering、EC2、ECS Fargate、ECR、RDS、S3、SSM、Secrets Manager、CloudWatch）、AWS CDK、Docker、LocalStack
-- データベース: MySQL、DBView / Materialized View、ETL
+- データベース: MySQL、ETL
 - CI/CD: GitHub Actions、Capistrano
 - AI: Amazon Bedrock（Converse API / Tool Use / AgentCore Runtime）、Claude Code、Devin、MCP
