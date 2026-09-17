@@ -1,11 +1,11 @@
 ---
 title: 株式会社 Maple Systems
-description: 2017-12 〜 2019-06
+description: 2017-12 〜 2019-07
 tags:
   - career
 ---
 
-[株式会社 Maple Systems](https://maplesystems.co.jp)（2017-12 〜 2019-06）
+[株式会社 Maple Systems](https://maplesystems.co.jp)（2017-12 〜 2019-07）
 
 ## 役割
 

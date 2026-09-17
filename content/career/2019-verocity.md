@@ -1,11 +1,11 @@
 ---
 title: Verocity 株式会社
-description: 2019-09 〜 現職
+description: 2019-09 〜 2020-11
 tags:
   - career
 ---
 
-[Verocity 株式会社](https://verocity.jp)（2019-09 〜 現職）
+[Verocity 株式会社](https://verocity.jp)（2019-09 〜 2020-11）
 
 ## 役割
 
