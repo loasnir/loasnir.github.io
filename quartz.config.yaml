@@ -68,10 +68,13 @@ plugins:
     order: 40
   - source: "@quartz-community/table-of-contents"
     enabled: true
+    options:
+      collapseByDefault: true
+      layout: legacy
     order: 50
     layout:
-      position: right
-      priority: 30
+      position: beforeBody
+      priority: 25
   - source: "@quartz-community/crawl-links"
     enabled: true
     options:
@@ -152,10 +155,7 @@ plugins:
       position: left
       priority: 50
   - source: "@quartz-community/graph"
-    enabled: true
-    layout:
-      position: right
-      priority: 10
+    enabled: false
   - source: "@quartz-community/search"
     enabled: true
     layout:
@@ -167,7 +167,7 @@ plugins:
   - source: "@quartz-community/backlinks"
     enabled: true
     layout:
-      position: right
+      position: afterBody
       priority: 50
   - source: "@quartz-community/article-title"
     enabled: true

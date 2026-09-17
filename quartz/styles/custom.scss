@@ -1,3 +1,65 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// ---------------------------------------------------------------------------
+// 2 カラム化（左サイドバー + 本文）
+// ---------------------------------------------------------------------------
+
+.page > #quartz-body {
+  & .sidebar.right {
+    display: none;
+  }
+
+  // base.scss のデスクトップグリッドは右サイドバー列を常に確保するため、
+  // 右カラムを空にするだけでは 320px の余白が残る。列ごと畳む。
+  // base.scss はメディアクエリなしの規則をデスクトップ用に使っているが、
+  // ここで同じ書き方をするとタブレット・モバイルの規則まで上書きしてしまうため
+  // デスクトップ幅に限定する。
+  @media all and ($desktop) {
+    grid-template-columns: #{$sidePanelWidth} auto;
+    grid-template-areas:
+      "grid-sidebar-left grid-header"
+      "grid-sidebar-left grid-center"
+      "grid-sidebar-left grid-footer";
+  }
+
+  // 本文の最大幅。日本語 1 行 40 字前後になる幅に揃える
+  // （base.scss が min-width: 100% を当てているため両方を上書きする）
+  @media all and not ($mobile) {
+    & .center,
+    & .page-header,
+    & footer {
+      max-width: 760px;
+      min-width: 0;
+      width: 100%;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// フッター
+// ---------------------------------------------------------------------------
+
+// footer plugin に「Created with Quartz」を消すオプションがないため CSS で差し替える。
+// MIT の帰属表示は LICENSE.txt / README.md 側で維持する。
+footer {
+  // base.scss が margin-left: 0 を当てるため、本文の左端と揃わない
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 1rem;
+
+  & > p {
+    font-size: 0;
+
+    &::before {
+      content: "© 2026 loasnir";
+      font-size: 0.9rem;
+    }
+  }
+
+  & ul {
+    margin-top: 0;
+  }
+}
+
