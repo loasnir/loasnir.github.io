@@ -7,7 +7,7 @@ tags:
 - **サーバーサイド**: Ruby（Rails）／PHP（Laravel・CakePHP）／Node.js（Express）。アーキテクチャ選定から設計実装まで対応。
 - **フロントエンド**: React/TypeScript 環境において、コンポーネント設計・実装が可能。
 - **インフラ**: AWS 環境で Terraform / AWS CDK（TypeScript）を用いた構成設計・実装。VPC Peering、SSM、RDS、S3、ECS Fargate、ECR、Secrets Manager、IAM 等。
-- **データベース**: MySQL（5.7→8.0 移行経験）、DBView / Materialized View 設計、ETL 実装。
+- **データベース**: MySQL、DBView / Materialized View 設計、ETL 実装。
 - **運用監視**: Datadog／Sentry の設定、基本的なアラートの設計・設定。CloudWatch（Logs Insights、Metric Filter、ダッシュボード設計）による構造化ログ基盤の運用観察。OpenTelemetry のトレース・メトリクス・ログ 3 シグナル相関を検証環境で実装し、可観測性投資の意思決定材料として提示。
 - **バッチ / データ処理**: Go による ETL パイプライン（producer / consumer 構成のストリーミング抽出、増分抽出の watermark 制御）の設計・実装。
 - **CI/CD**: CircleCI／GitHub Actions を設定し、本番環境その他の CI/CD 環境を構築・運用。環境別（staging / production）のデプロイ経路分離、OIDC による権限設計。
