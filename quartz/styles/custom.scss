@@ -63,3 +63,79 @@ footer {
   }
 }
 
+// ---------------------------------------------------------------------------
+// 日本語前提の組版
+// ---------------------------------------------------------------------------
+
+// theme.ts が生成するフォールバックは欧文向けなので、和文フォントを足した列で上書きする
+:root {
+  --headerFont: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --bodyFont: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+body {
+  font-size: 16.5px;
+  line-height: 1.8;
+}
+
+// base.scss が tbody / li / p に line-height: 1.6rem（= 25.6px）を当てるため、
+// body の指定だけでは 1.8 にならない
+tbody,
+li,
+p {
+  line-height: 1.8;
+}
+
+article {
+  // 段落の切れ目を行間より広く取り、箇条書きが本文と地続きに見えないようにする
+  & p,
+  & ul,
+  & ol,
+  & blockquote,
+  & table {
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+  }
+
+  & li {
+    margin: 0.4em 0;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    margin-top: 2.4em;
+  }
+
+  & h1 {
+    font-size: 1.6em;
+  }
+  & h2 {
+    font-size: 1.3em;
+  }
+  & h3 {
+    font-size: 1.1em;
+  }
+  & h4 {
+    font-size: 1em;
+  }
+}
+
+.article-title {
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+// 内部リンクの薄青の帯をやめ、下線だけで示す
+a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--tertiary);
+}
