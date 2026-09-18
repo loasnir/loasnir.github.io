@@ -4,9 +4,11 @@ import "../styles/site.css"
 interface Props {
   title: string
   description?: string
+  /** 旧 URL のスタブで使う転送先 */
+  redirectTo?: string
 }
 
-const { title, description } = Astro.props
+const { title, description, redirectTo } = Astro.props
 const nav = [
   { href: "/career/", label: "職務経歴" },
   { href: "/skills/", label: "スキル" },
@@ -22,6 +24,7 @@ const nav = [
     <meta name="robots" content="noindex, nofollow" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {redirectTo && <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
