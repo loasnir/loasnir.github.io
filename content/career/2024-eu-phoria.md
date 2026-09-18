@@ -1,9 +1,4 @@
----
-title: 株式会社ユーフォリア
-description: 2024-10 〜 現職
-tags:
-  - career
----
+# 株式会社ユーフォリア
 
 [株式会社ユーフォリア](https://eu-phoria.jp)（2024-10 〜 現職）
 

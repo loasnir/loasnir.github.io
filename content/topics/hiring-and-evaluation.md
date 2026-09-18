@@ -1,10 +1,4 @@
----
-title: 採用と評価
-description: 採用基準と評価制度をどう噛み合わせるか。
-tags:
-  - hiring
-  - management
----
+# 採用と評価
 
 ## なぜ持ち歩くか
 

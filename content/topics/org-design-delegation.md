@@ -1,10 +1,4 @@
----
-title: 組織設計と権限委譲
-description: どこまでを任せ、どこを自分で持つかの線引き。
-tags:
-  - management
-  - organization
----
+# 組織設計と権限委譲
 
 ## なぜ持ち歩くか
 

@@ -1,11 +1,4 @@
----
-title: 仕事の価値観
-description: 判断や振る舞いのよりどころにしている考え方です。
-aliases:
-  - /stance/policy
-tags:
-  - stance
----
+# 仕事の価値観
 
 ## 大切にしているスタンス
 

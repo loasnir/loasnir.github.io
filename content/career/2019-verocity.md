@@ -1,9 +1,4 @@
----
-title: Verocity 株式会社
-description: 2019-09 〜 2020-11
-tags:
-  - career
----
+# Verocity 株式会社
 
 [Verocity 株式会社](https://linkties-digital.com)（2019-09 〜 2020-11）
 

@@ -6,8 +6,6 @@ language = "ja"
 [build]
 build-dir = "book"
 
-[preprocessor.frontmatter]
-command = "ruby preprocessors/frontmatter.rb"
 
 [output.html]
 site-url = "/"

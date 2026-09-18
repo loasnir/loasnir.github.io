@@ -1,9 +1,4 @@
----
-title: 株式会社Grooves
-description: 2020-11 〜 2024-09
-tags:
-  - career
----
+# 株式会社Grooves
 
 [株式会社Grooves](https://grooves.com)（2020-11 〜 2024-09）
 

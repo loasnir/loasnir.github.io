@@ -1,12 +1,4 @@
----
-title: 注力してきたこと
-description: マネジメント・開発それぞれで重きを置いてきたことです。
-aliases:
-  - /stance/management-focus
-  - /stance/development-focus
-tags:
-  - stance
----
+# 注力してきたこと
 
 ## マネジメント
 

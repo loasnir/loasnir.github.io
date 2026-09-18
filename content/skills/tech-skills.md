@@ -1,8 +1,4 @@
----
-title: 技術スキル詳細
-tags:
-  - skills
----
+# 技術スキル詳細
 
 - **サーバーサイド**: Ruby（Rails）／PHP（Laravel・CakePHP）／Node.js（Express）。アーキテクチャ選定から設計実装まで対応。
 - **フロントエンド**: React/TypeScript 環境において、コンポーネント設計・実装が可能。
