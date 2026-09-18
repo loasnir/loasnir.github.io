@@ -1,0 +1,77 @@
+site_name: しろへび工房
+site_url: https://loasnir.github.io/
+docs_dir: content
+site_dir: site
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: ja
+  features:
+    # セクション見出し自体を index ページへのリンクにする（ナビの名前が重複しない）
+    - navigation.indexes
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードにする
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードにする
+
+extra:
+  generator: false
+
+# notes/ はまだ記事が 1 本もないため出さない。ノートを書き始めたら外す
+exclude_docs: |
+  notes/
+
+nav:
+  - ホーム: index.md
+  - 職務経歴:
+      - career/index.md
+      - career/2013-nihon-system-development.md
+      - career/2017-maple-systems.md
+      - career/2019-verocity.md
+      - career/2020-grooves.md
+      - career/2024-eu-phoria.md
+  - トピック:
+      - topics/index.md
+      - topics/ai-work-redesign.md
+      - topics/hiring-and-evaluation.md
+      - topics/org-design-delegation.md
+      - topics/sre-operations-mechanism.md
+      - topics/translating-business-and-tech.md
+  - スタンス:
+      - stance/index.md
+      - stance/values.md
+      - stance/focus.md
+  - スキル:
+      - skills/index.md
+      - skills/tech-skills.md
+      - skills/management-skills.md
+  - タグ: tags.md
+
+hooks:
+  - hooks/noindex.py
+
+plugins:
+  - search:
+      lang: ja
+  - tags
+  - rss:
+      # 旧サイトと同じ /index.xml で配信する
+      feeds_filenames:
+        rss_created: index.xml
+  - redirects:
+      redirect_maps:
+        resume.md: career/index.md
+        posts.md: index.md
+        stance/policy.md: stance/values.md
+        stance/management-focus.md: stance/focus.md
+        stance/development-focus.md: stance/focus.md

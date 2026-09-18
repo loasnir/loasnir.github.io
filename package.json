@@ -1,19 +1,9 @@
 {
-  "name": "loasnir-site",
+  "name": "loasnir-site-tools",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
     "check:viewports": "node bin/check-viewports"
-  },
-  "engines": {
-    "node": ">=22"
-  },
-  "dependencies": {
-    "@astrojs/rss": "^4.0.19",
-    "astro": "^5.14.1"
   },
   "devDependencies": {
     "playwright-core": "^1.56.0"

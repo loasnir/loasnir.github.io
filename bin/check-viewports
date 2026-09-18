@@ -23,15 +23,6 @@ async function contentPaths(dir = "content", prefix = "") {
   return out
 }
 
-// タグページは frontmatter から生成されるので、ビルド結果から拾う
-async function tagPaths() {
-  try {
-    const dirs = await readdir("dist/tags", { withFileTypes: true })
-    return ["/tags/", ...dirs.filter((e) => e.isDirectory()).map((e) => `/tags/${e.name}/`)]
-  } catch {
-    return []
-  }
-}
 
 function parseArgs(argv) {
   const opts = { base: "http://localhost:8080", pages: null, screenshots: null }
@@ -98,7 +89,7 @@ if (opts.help) {
   console.log(USAGE)
   process.exit(0)
 }
-const pages = opts.pages ?? [...(await contentPaths()), ...(await tagPaths())].sort()
+const pages = opts.pages ?? (await contentPaths()).sort()
 if (opts.screenshots) await mkdir(opts.screenshots, { recursive: true })
 
 const browser = await chromium.launch()

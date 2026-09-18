@@ -1,11 +1,12 @@
-FROM node:24-alpine
+FROM python:3.12-slim
 
 WORKDIR /site
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN npm run build
+ENV DISABLE_MKDOCS_2_WARNING=true
+RUN mkdocs build --strict
 
 EXPOSE 8080
-CMD ["npx", "astro", "preview", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["python", "-m", "http.server", "8080", "--directory", "site"]
