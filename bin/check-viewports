@@ -12,6 +12,8 @@ const HEIGHT = 844
 async function contentPaths(dir = "content", prefix = "") {
   const out = []
   for (const e of await readdir(dir, { withFileTypes: true })) {
+    // src/content.config.ts でビルド対象から外しているフォルダ
+    if (e.isDirectory() && e.name === "notes" && prefix === "") continue
     if (e.isDirectory()) out.push(...(await contentPaths(path.join(dir, e.name), `${prefix}${e.name}/`)))
     else if (e.name.endsWith(".md")) {
       const slug = `${prefix}${e.name.slice(0, -3)}`.replace(/(^|\/)index$/, "")

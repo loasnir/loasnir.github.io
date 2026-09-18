@@ -2,7 +2,9 @@ import { defineCollection, z } from "astro:content"
 import { glob } from "astro/loaders"
 
 const pages = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content" }),
+  // notes/ はまだ記事が 1 本もないため、空の一覧になるページを出さないよう外している。
+  // ノートを書き始めたら除外を消す
+  loader: glob({ pattern: ["**/*.md", "!notes/**"], base: "./content" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),

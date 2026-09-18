@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props
 const { Content } = await render(entry)
 
-// フォルダの index ページでは、同じフォルダ直下のページを一覧にする。
+// フォルダの index ページでは、そのフォルダ配下のページを一覧にする。
 // glob loader が foo/index.md の id を "foo" にするため、
 // index かどうかは id からは判らない。子を持つかどうかで判定する
 const slug = toSlug(entry.id)

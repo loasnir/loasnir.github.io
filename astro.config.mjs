@@ -7,7 +7,8 @@ export default defineConfig({
   // /resume/index・/posts/index は directory 出力の resume/index.html が同じ内容を返すため挙げていない
   redirects: {
     "/resume": "/career/",
-    "/posts": "/notes/",
+    // notes/ をビルド対象から外しているため、旧 /posts はトップに向ける
+    "/posts": "/",
     "/stance/policy": "/stance/values/",
     "/stance/management-focus": "/stance/focus/",
     "/stance/development-focus": "/stance/focus/",

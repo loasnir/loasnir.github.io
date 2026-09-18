@@ -17,7 +17,7 @@ Docker で動かす場合は `docker build -t loasnir-site . && docker run --rm 
 ## 構成
 
 - `content/` — ページの Markdown。frontmatter は `title`（必須）・`description`・`tags`・`aliases`・`showChildren`
-- `src/pages/[...slug].astro` — 全ページのルーティング。`foo/index.md` は `/foo/` になり、同じフォルダ直下のページを一覧にする（`showChildren: false` で抑止）
+- `src/pages/[...slug].astro` — 全ページのルーティング。`foo/index.md` は `/foo/` になり、そのフォルダ配下のページを一覧にする（`showChildren: false` で抑止）
 - `src/styles/site.css` — デジタル庁デザインシステムのトークンに合わせた単一スタイル
 - `astro.config.mjs` — 旧サイトの URL からのリダイレクト
 
