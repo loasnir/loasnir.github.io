@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# mdbook build の後始末込みのビルド。
+# mdBook が [output.html.redirect] から作るスタブは theme/head.hbs を
+# 通らず robots メタが入らないため、ここで差し込む。
+require "fileutils"
+
+META = %(<meta name="robots" content="noindex, nofollow" />)
+
+abort "mdbook build に失敗しました" unless system("mdbook", "build")
+
+added = 0
+Dir.glob("book/**/*.html").each do |page|
+  html = File.read(page)
+  next if html.include?('name="robots"')
+  File.write(page, html.sub("<head>", "<head>\n    #{META}"))
+  added += 1
+end
+puts "robots メタを追加: #{added} 枚"

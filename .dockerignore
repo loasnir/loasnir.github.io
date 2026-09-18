@@ -1,4 +1,3 @@
-site
-.venv
-.cache
+book
+node_modules
 .git

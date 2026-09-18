@@ -1,0 +1,22 @@
+# Summary
+
+[しろへび工房](index.md)
+
+- [職務経歴](career/index.md)
+  - [株式会社ユーフォリア](career/2024-eu-phoria.md)
+  - [株式会社Grooves](career/2020-grooves.md)
+  - [Verocity 株式会社](career/2019-verocity.md)
+  - [株式会社 Maple Systems](career/2017-maple-systems.md)
+  - [日本システム開発株式会社](career/2013-nihon-system-development.md)
+- [スキル](skills/index.md)
+  - [技術スキル詳細](skills/tech-skills.md)
+  - [マネジメントスキル詳細](skills/management-skills.md)
+- [スタンス](stance/index.md)
+  - [仕事の価値観](stance/values.md)
+  - [注力してきたこと](stance/focus.md)
+- [トピック](topics/index.md)
+  - [AI と業務の再設計](topics/ai-work-redesign.md)
+  - [組織設計と権限委譲](topics/org-design-delegation.md)
+  - [SRE と運用の仕組み化](topics/sre-operations-mechanism.md)
+  - [採用と評価](topics/hiring-and-evaluation.md)
+  - [経営と技術の翻訳](topics/translating-business-and-tech.md)

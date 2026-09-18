@@ -1,0 +1,41 @@
+[book]
+title = "しろへび工房"
+src = "content"
+language = "ja"
+
+[build]
+build-dir = "book"
+
+[preprocessor.frontmatter]
+command = "ruby preprocessors/frontmatter.rb"
+
+[output.html]
+site-url = "/"
+no-section-label = true
+
+# mdBook は content のパスがそのまま .html になる。
+# 旧サイトはディレクトリ形式の URL だったので、そちらから受ける。
+# 末尾に index.md を持つページ（/career/ など）は career/index.html が
+# そのまま応答するため挙げていない
+[output.html.redirect]
+"/career/2013-nihon-system-development/index.html" = "/career/2013-nihon-system-development.html"
+"/career/2017-maple-systems/index.html" = "/career/2017-maple-systems.html"
+"/career/2019-verocity/index.html" = "/career/2019-verocity.html"
+"/career/2020-grooves/index.html" = "/career/2020-grooves.html"
+"/career/2024-eu-phoria/index.html" = "/career/2024-eu-phoria.html"
+"/skills/tech-skills/index.html" = "/skills/tech-skills.html"
+"/skills/management-skills/index.html" = "/skills/management-skills.html"
+"/stance/values/index.html" = "/stance/values.html"
+"/stance/focus/index.html" = "/stance/focus.html"
+"/topics/ai-work-redesign/index.html" = "/topics/ai-work-redesign.html"
+"/topics/org-design-delegation/index.html" = "/topics/org-design-delegation.html"
+"/topics/sre-operations-mechanism/index.html" = "/topics/sre-operations-mechanism.html"
+"/topics/hiring-and-evaluation/index.html" = "/topics/hiring-and-evaluation.html"
+"/topics/translating-business-and-tech/index.html" = "/topics/translating-business-and-tech.html"
+
+# さらに前のサイトから引き継いでいる別名
+"/resume/index.html" = "/career/index.html"
+"/posts/index.html" = "/index.html"
+"/stance/policy/index.html" = "/stance/values.html"
+"/stance/management-focus/index.html" = "/stance/focus.html"
+"/stance/development-focus/index.html" = "/stance/focus.html"

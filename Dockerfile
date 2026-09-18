@@ -1,12 +1,16 @@
-FROM python:3.12-slim
+FROM ruby:3.3-slim
 
+ARG MDBOOK_VERSION=0.5.4
 WORKDIR /site
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends curl ca-certificates python3 \
+  && rm -rf /var/lib/apt/lists/* \
+  && curl -sSL "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-musl.tar.gz" \
+    | tar -xz -C /usr/local/bin
 
 COPY . .
-ENV DISABLE_MKDOCS_2_WARNING=true
-RUN mkdocs build --strict
+RUN ./bin/build
 
 EXPOSE 8080
-CMD ["python", "-m", "http.server", "8080", "--directory", "site"]
+CMD ["python3", "-m", "http.server", "8080", "--directory", "book"]

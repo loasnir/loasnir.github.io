@@ -9,15 +9,18 @@ import path from "node:path"
 const WIDTHS = [360, 390, 600, 820, 1024, 1280]
 const HEIGHT = 844
 
+// mdBook は content のパスがそのまま .html になる。index.md だけディレクトリの
+// インデックスとして残るので、そこだけ末尾スラッシュの形で叩く
 async function contentPaths(dir = "content", prefix = "") {
   const out = []
   for (const e of await readdir(dir, { withFileTypes: true })) {
-    // src/content.config.ts でビルド対象から外しているフォルダ
     if (e.isDirectory() && e.name === "notes" && prefix === "") continue
     if (e.isDirectory()) out.push(...(await contentPaths(path.join(dir, e.name), `${prefix}${e.name}/`)))
     else if (e.name.endsWith(".md")) {
-      const slug = `${prefix}${e.name.slice(0, -3)}`.replace(/(^|\/)index$/, "")
-      out.push(`/${slug}${slug ? "/" : ""}`)
+      const name = e.name.slice(0, -3)
+      // SUMMARY.md は目次の定義、404.md は存在しないパス用なので検査しない
+      if (name === "SUMMARY" || name === "404") continue
+      out.push(name === "index" ? `/${prefix}` : `/${prefix}${name}.html`)
     }
   }
   return out
@@ -54,8 +57,8 @@ function measure() {
     return { top: Math.round(box.top), width: Math.round(box.width) }
   }
   return {
-    title: rect("article h1"),
-    article: rect("article"),
+    title: rect("main h1"),
+    article: rect("main"),
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth,
   }
