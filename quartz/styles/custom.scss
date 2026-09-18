@@ -160,3 +160,75 @@ a.internal {
     height: auto;
   }
 }
+
+// explorer プラグインのドロワー表示は、配布される CSS 側で 800px 固定に
+// なっており $mobile を 1199px へ寄せても追随しない。800〜1199px では
+// ツリーが開いたまま flex 行の中央に置かれ、サイト名と検索が画面外へ
+// 押し出される。JS は .mobile-explorer の可視性だけを見て collapsed を
+// 付けるため、CSS をこの帯まで伸ばせば挙動ごと揃う。
+@media all and ($mobile) {
+  .explorer {
+    order: -1;
+    height: initial;
+    overflow: hidden;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .explorer button.mobile-explorer {
+    display: flex;
+  }
+  .explorer button.desktop-explorer {
+    display: none;
+  }
+
+  .explorer.collapsed,
+  .explorer:not(.collapsed) {
+    flex: 0 0 34px;
+  }
+  .explorer.collapsed > .explorer-content {
+    transform: translateX(-100vw);
+    visibility: hidden;
+  }
+  .explorer:not(.collapsed) > .explorer-content {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .explorer .explorer-content {
+    box-sizing: border-box;
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+    background-color: var(--light);
+    max-width: 100vw;
+    width: 100vw;
+    transform: translateX(-100vw);
+    transition:
+      transform 200ms ease,
+      visibility 200ms ease;
+    overflow: hidden;
+    padding: 4rem 0 2rem 0;
+    height: 100dvh;
+    max-height: 100dvh;
+    visibility: hidden;
+  }
+  .explorer .mobile-explorer {
+    margin: 0;
+    padding: 5px;
+    z-index: 101;
+  }
+  .explorer .mobile-explorer.hide-until-loaded {
+    display: none;
+  }
+
+  .page > #quartz-body .hide-until-loaded ~ .explorer-content {
+    display: none;
+  }
+  .page > #quartz-body.lock-scroll > :not(.sidebar.left:has(.explorer)) {
+    transform: translateX(100dvw);
+  }
+}
