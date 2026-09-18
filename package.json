@@ -12,7 +12,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "astro": "^5.14.1"
+    "astro": "^7.3.3"
   },
   "devDependencies": {
     "playwright-core": "^1.56.0"
