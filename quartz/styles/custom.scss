@@ -139,3 +139,18 @@ a.internal {
   text-decoration-thickness: 1px;
   text-decoration-color: var(--tertiary);
 }
+
+// ---------------------------------------------------------------------------
+// モバイル
+// ---------------------------------------------------------------------------
+
+// 左サイドバーがモバイルでも sticky のまま画面に張り付き、記事が
+// その下に押し出されて初期表示で読めなくなっていた。
+// base.scss 側にも position: initial の指定があるが効いていないため、
+// 最後に読み込まれるこのファイルで明示的に解除する。
+@media all and ($mobile) {
+  .page > #quartz-body .sidebar.left {
+    position: static;
+    height: auto;
+  }
+}

@@ -255,6 +255,19 @@ plugins:
     layout:
       position: left
       priority: 60
+      display: desktop-only
+  - source: "@quartz-community/recent-notes"
+    enabled: true
+    options:
+      title: 最近の更新
+      limit: 5
+      showTags: false
+      hideTagPages: true
+      hideFolderPages: true
+    layout:
+      position: afterBody
+      priority: 60
+      display: mobile-only
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
