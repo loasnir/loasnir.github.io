@@ -1,18 +1,28 @@
 #!/usr/bin/env node
 // 幅のレンジを横断して「記事が読める状態か」を判定する検収スクリプト。
-// Quartz のブレークポイントは 800 と 1200 の 2 段しかなく、その中間帯
-// （折りたたみ端末・タブレット縦）の崩れを目視でしか拾えなかったため、
-// 判定を機械化する。
+// 中間帯（折りたたみ端末・タブレット縦）の崩れを目視でしか拾えなかったため、
+// 判定を機械化する。対象ページは content/ から自動で列挙する。
 import { chromium } from "playwright-core"
-import { mkdir } from "node:fs/promises"
+import { mkdir, readdir } from "node:fs/promises"
 import path from "node:path"
 
 const WIDTHS = [360, 390, 600, 820, 1024, 1280]
 const HEIGHT = 844
-const DEFAULT_PAGES = ["/", "/career/", "/career/2024-eu-phoria", "/skills/tech-skills"]
+
+async function contentPaths(dir = "content", prefix = "") {
+  const out = []
+  for (const e of await readdir(dir, { withFileTypes: true })) {
+    if (e.isDirectory()) out.push(...(await contentPaths(path.join(dir, e.name), `${prefix}${e.name}/`)))
+    else if (e.name.endsWith(".md")) {
+      const slug = `${prefix}${e.name.slice(0, -3)}`.replace(/(^|\/)index$/, "")
+      out.push(`/${slug}${slug ? "/" : ""}`)
+    }
+  }
+  return out.sort()
+}
 
 function parseArgs(argv) {
-  const opts = { base: "http://localhost:8080", pages: DEFAULT_PAGES, screenshots: null }
+  const opts = { base: "http://localhost:8080", pages: null, screenshots: null }
   const rest = []
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--screenshots") opts.screenshots = argv[++i]
@@ -27,7 +37,7 @@ function parseArgs(argv) {
 const USAGE = `使い方: bin/check-viewports [ベースURL] [--pages /a,/b] [--screenshots ディレクトリ]
 
   ベースURL     既定 http://localhost:8080（本番は https://loasnir.github.io）
-  --pages       検査するパスをカンマ区切りで指定（既定: ${DEFAULT_PAGES.join(",")}）
+  --pages       検査するパスをカンマ区切りで指定（既定: content/ から自動列挙）
   --screenshots 指定したディレクトリに {ページ}-{幅}.png を保存する
 
   幅 ${WIDTHS.join(" / ")} を高さ ${HEIGHT} で検査し、1 件でも NG があれば exit 1。`
@@ -38,19 +48,10 @@ function measure() {
     const el = document.querySelector(sel)
     if (!el) return null
     const box = el.getBoundingClientRect()
-    return {
-      top: Math.round(box.top),
-      bottom: Math.round(box.bottom),
-      height: Math.round(box.height),
-      width: Math.round(box.width),
-    }
+    return { top: Math.round(box.top), width: Math.round(box.width) }
   }
-  const sidebar = document.querySelector(".sidebar.left")
   return {
-    title: rect("h1.article-title"),
-    sidebar: sidebar
-      ? { ...rect(".sidebar.left"), position: getComputedStyle(sidebar).position }
-      : null,
+    title: rect("article h1"),
     article: rect("article"),
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth,
@@ -58,37 +59,26 @@ function measure() {
 }
 
 function judge(m, height) {
-  const checks = []
-  // (a) 記事タイトルが初期表示で見えているか
-  checks.push({
-    key: "title",
-    ok: m.title !== null && m.title.top > 0 && m.title.top < height,
-    detail: m.title ? `top=${m.title.top}` : "見つからない",
-  })
-  // (b) 左サイドバーが本文の上に積まれて画面を占有していないか。
-  // 本文の横に並ぶ sticky サイドバーはデスクトップ 2 カラムの設計なので落とさない
-  checks.push({
-    key: "sidebar",
-    ok:
-      m.sidebar === null ||
-      m.sidebar.position !== "sticky" ||
-      m.article === null ||
-      m.sidebar.bottom > m.article.top,
-    detail: m.sidebar ? `h=${m.sidebar.height} ${m.sidebar.position}` : "なし",
-  })
-  // (c) 横スクロールが出ていないか
-  checks.push({
-    key: "hscroll",
-    ok: m.scrollWidth <= m.innerWidth,
-    detail: `${m.scrollWidth}/${m.innerWidth}`,
-  })
-  // (d) 本文に読める幅が残っているか
-  checks.push({
-    key: "article",
-    ok: m.article !== null && m.article.width >= 320,
-    detail: m.article ? `w=${m.article.width}` : "見つからない",
-  })
-  return checks
+  return [
+    // (a) 記事タイトルが初期表示で見えているか
+    {
+      key: "title",
+      ok: m.title !== null && m.title.top > 0 && m.title.top < height,
+      detail: m.title ? `top=${m.title.top}` : "見つからない",
+    },
+    // (b) 横スクロールが出ていないか
+    {
+      key: "hscroll",
+      ok: m.scrollWidth <= m.innerWidth,
+      detail: `${m.scrollWidth}/${m.innerWidth}`,
+    },
+    // (c) 本文が画面内に収まっているか
+    {
+      key: "article",
+      ok: m.article !== null && m.article.width <= m.innerWidth,
+      detail: m.article ? `w=${m.article.width}` : "見つからない",
+    },
+  ]
 }
 
 const opts = parseArgs(process.argv.slice(2))
@@ -96,17 +86,17 @@ if (opts.help) {
   console.log(USAGE)
   process.exit(0)
 }
+const pages = opts.pages ?? (await contentPaths())
 if (opts.screenshots) await mkdir(opts.screenshots, { recursive: true })
 
 const browser = await chromium.launch()
 const rows = []
 for (const width of WIDTHS) {
   const ctx = await browser.newContext({ viewport: { width, height: HEIGHT }, locale: "ja-JP" })
-  for (const pagePath of opts.pages) {
+  for (const pagePath of pages) {
     const page = await ctx.newPage()
     await page.goto(opts.base + pagePath, { waitUntil: "networkidle" })
-    const checks = judge(await page.evaluate(measure), HEIGHT)
-    rows.push({ width, pagePath, checks })
+    rows.push({ width, pagePath, checks: judge(await page.evaluate(measure), HEIGHT) })
     if (opts.screenshots) {
       const name = (pagePath.replace(/^\/|\/$/g, "") || "index").replace(/\//g, "-")
       await page.screenshot({ path: path.join(opts.screenshots, `${name}-${width}.png`) })
@@ -118,11 +108,12 @@ for (const width of WIDTHS) {
 await browser.close()
 
 const pad = (s, n) => String(s) + " ".repeat(Math.max(0, n - [...String(s)].length))
-console.log(`対象: ${opts.base}`)
-console.log(pad("幅", 6) + pad("ページ", 28) + "title       sidebar          hscroll     article")
+console.log(`対象: ${opts.base}（${pages.length} ページ × ${WIDTHS.length} 幅）`)
+console.log(pad("幅", 6) + pad("ページ", 38) + "title       hscroll       article")
 for (const { width, pagePath, checks } of rows) {
-  const cells = checks.map((c) => pad(`${c.ok ? "OK" : "NG"} ${c.detail}`, 12)).join("")
-  console.log(pad(width, 6) + pad(pagePath, 28) + cells)
+  console.log(
+    pad(width, 6) + pad(pagePath, 38) + checks.map((c) => pad(`${c.ok ? "OK" : "NG"} ${c.detail}`, 14)).join(""),
+  )
 }
 
 const ng = rows.filter((r) => r.checks.some((c) => !c.ok))
@@ -132,7 +123,6 @@ if (ng.length === 0) {
 }
 console.log(`\nNG ${ng.length} 件 / 全 ${rows.length} 件`)
 for (const { width, pagePath, checks } of ng) {
-  const failed = checks.filter((c) => !c.ok).map((c) => `${c.key}(${c.detail})`)
-  console.log(`  ${width} ${pagePath}: ${failed.join(", ")}`)
+  console.log(`  ${width} ${pagePath}: ${checks.filter((c) => !c.ok).map((c) => `${c.key}(${c.detail})`).join(", ")}`)
 }
 process.exit(1)

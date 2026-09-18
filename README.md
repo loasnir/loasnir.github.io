@@ -1,25 +1,28 @@
-# Quartz v5
+# しろへび工房
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+個人サイト。[Astro](https://astro.build) で `content/` の Markdown を静的サイトに変換し、GitHub Actions から GitHub Pages へデプロイしている。
+公開先は <https://loasnir.github.io>。全ページに `noindex, nofollow` を付けている。
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+## 開発
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+```sh
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # dist/ に出力
+npm run preview  # ビルド結果を確認
+```
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+Docker で動かす場合は `docker build -t loasnir-site . && docker run --rm -p 8080:8080 loasnir-site`。
+
+## 構成
+
+- `content/` — ページの Markdown。frontmatter は `title`（必須）・`description`・`tags`・`aliases`・`showChildren`
+- `src/pages/[...slug].astro` — 全ページのルーティング。`foo/index.md` は `/foo/` になり、同じフォルダ直下のページを一覧にする（`showChildren: false` で抑止）
+- `src/styles/site.css` — デジタル庁デザインシステムのトークンに合わせた単一スタイル
+- `astro.config.mjs` — 旧サイトの URL からのリダイレクト
 
 ## 幅の検収
 
-`npm run check:viewports -- <ベースURL> [--screenshots <dir>]` で 360〜1280px の 6 幅を横断し、記事タイトルが画面内にあるか・サイドバーが本文を押し出していないか・横スクロールの有無・本文幅を判定する（NG があれば exit 1）。
+`npm run check:viewports -- <ベースURL> [--screenshots <dir>]` で 360〜1280px の 6 幅 × 全ページを横断し、記事タイトルが画面内にあるか・横スクロールの有無・本文が画面内に収まっているかを判定する（NG があれば exit 1）。
 初回のみ `npx playwright install chromium` でブラウザを取得する（`playwright-core` は devDependency にあるがブラウザ本体は含まない）。
 既定のベース URL は `http://localhost:8080`、本番を見るときは `https://loasnir.github.io` を渡す。
-
-既知・未対応: 1280px で階層の深いページを開くと、explorer が現在ページを scrollIntoView するため初期表示が約 278px スクロールした状態になり、タイトルの判定が NG になる。1 カラム化以前からの挙動。
-
-## Sponsors
-
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
