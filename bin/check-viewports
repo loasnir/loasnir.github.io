@@ -38,7 +38,12 @@ function measure() {
     const el = document.querySelector(sel)
     if (!el) return null
     const box = el.getBoundingClientRect()
-    return { top: Math.round(box.top), height: Math.round(box.height), width: Math.round(box.width) }
+    return {
+      top: Math.round(box.top),
+      bottom: Math.round(box.bottom),
+      height: Math.round(box.height),
+      width: Math.round(box.width),
+    }
   }
   const sidebar = document.querySelector(".sidebar.left")
   return {
@@ -60,10 +65,15 @@ function judge(m, height) {
     ok: m.title !== null && m.title.top > 0 && m.title.top < height,
     detail: m.title ? `top=${m.title.top}` : "見つからない",
   })
-  // (b) 左サイドバーが画面を占有していないか（低いか、sticky でなければよい）
+  // (b) 左サイドバーが本文の上に積まれて画面を占有していないか。
+  // 本文の横に並ぶ sticky サイドバーはデスクトップ 2 カラムの設計なので落とさない
   checks.push({
     key: "sidebar",
-    ok: m.sidebar === null || m.sidebar.height <= 200 || m.sidebar.position !== "sticky",
+    ok:
+      m.sidebar === null ||
+      m.sidebar.position !== "sticky" ||
+      m.article === null ||
+      m.sidebar.bottom > m.article.top,
     detail: m.sidebar ? `h=${m.sidebar.height} ${m.sidebar.position}` : "なし",
   })
   // (c) 横スクロールが出ていないか

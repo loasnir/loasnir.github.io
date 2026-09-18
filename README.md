@@ -14,6 +14,8 @@ Quartz is a set of tools that helps you publish your [digital garden](https://jz
 初回のみ `npx playwright install chromium` でブラウザを取得する（`playwright-core` は devDependency にあるがブラウザ本体は含まない）。
 既定のベース URL は `http://localhost:8080`、本番を見るときは `https://loasnir.github.io` を渡す。
 
+既知・未対応: 1280px で階層の深いページを開くと、explorer が現在ページを scrollIntoView するため初期表示が約 278px スクロールした状態になり、タイトルの判定が NG になる。1 カラム化以前からの挙動。
+
 ## Sponsors
 
 <p align="center">
