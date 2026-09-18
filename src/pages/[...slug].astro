@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from "astro:content"
+import Base from "../layouts/Base.astro"
+import { toSlug } from "../slug"
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages")
+  return pages.map((entry) => ({
+    params: { slug: toSlug(entry.id) },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+
+// フォルダの index ページでは、同じフォルダ直下のページを一覧にする。
+// glob loader が foo/index.md の id を "foo" にするため、
+// index かどうかは id からは判らない。子を持つかどうかで判定する
+const slug = toSlug(entry.id)
+const children =
+  slug && entry.data.showChildren
+    ? (await getCollection("pages"))
+        .filter((p) => p.id.startsWith(`${slug}/`))
+        .sort((a, b) => a.id.localeCompare(b.id))
+    : []
+---
+
+<Base title={entry.data.title} description={entry.data.description}>
+  <article>
+    <h1>{entry.data.title}</h1>
+    {entry.data.description && <p class="description">{entry.data.description}</p>}
+    <Content />
+    {
+      children.length > 0 && (
+        <ul class="children">
+          {children.map((child) => (
+            <li>
+              <a href={`/${toSlug(child.id)}/`}>{child.data.title}</a>
+              {child.data.description && <p class="child-desc">{child.data.description}</p>}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </article>
+</Base>

@@ -1,0 +1,184 @@
+/* デジタル庁デザインシステムのトークンに合わせた最小構成。装飾・アニメーションは持たない */
+:root {
+  --text: #1a1a1c;
+  --text-sub: #626264;
+  --border: #d8d8db;
+  --surface: #f1f1f4;
+  --primary: #0017c1;
+  --bg: #ffffff;
+  --radius: 8px;
+  --measure: 760px;
+  --gutter: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f1f1f4;
+    --text-sub: #b4b4b7;
+    --border: #46464a;
+    --surface: #26262a;
+    --primary: #9aa5ff;
+    --bg: #1a1a1c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  padding: 0 var(--gutter);
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans JP", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+a {
+  color: var(--primary);
+  text-underline-offset: 0.2em;
+}
+
+/* ヘッダー・フッター */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.2rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .site-name {
+  margin-right: auto;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.2rem;
+}
+
+.site-footer {
+  margin: 3rem 0 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-sub);
+  font-size: 0.875rem;
+}
+
+/* 本文 */
+article h1 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+
+article h2 {
+  margin: 2.4rem 0 0.8rem;
+  font-size: 1.25rem;
+}
+
+article h3 {
+  margin: 2rem 0 0.6rem;
+  font-size: 1.05rem;
+}
+
+article .description {
+  margin: 0 0 2rem;
+  color: var(--text-sub);
+}
+
+article img,
+article pre {
+  max-width: 100%;
+}
+
+article pre,
+article code {
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+article pre {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+article code {
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+}
+
+article pre code {
+  padding: 0;
+  background: none;
+}
+
+article blockquote {
+  margin: 1.6rem 0;
+  padding: 0.8rem 1rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+
+article blockquote > :first-child {
+  margin-top: 0;
+}
+
+article blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* 表は幅の狭い画面で表だけを横スクロールさせ、ページ全体を広げない */
+article table {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+article th,
+article td {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+/* フォルダの index ページに出す子ページ一覧 */
+.children {
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.children li {
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.children li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.children .child-desc {
+  margin: 0.2rem 0 0;
+  color: var(--text-sub);
+  font-size: 0.875rem;
+}
