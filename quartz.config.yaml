@@ -7,7 +7,6 @@ configuration:
   analytics: null
   locale: ja-JP
   baseUrl: loasnir.github.io
-  # 検索結果に出さない（URL を知っている人は閲覧可）。退職後に外す
   noindex: true
   ignorePatterns:
     - private
