@@ -7,8 +7,10 @@
  * Screen width between $mobile and $desktop width will use the tablet layout.
  * assuming mobile < desktop
  */
+// 1200px 未満は 1 カラム（左サイドバーを畳み、最近の更新を本文末尾へ回す）。
+// $desktop の 1200px と重ならないよう 1199px にしている
 $breakpoints: (
-  mobile: 800px,
+  mobile: 1199px,
   desktop: 1200px,
 );
 

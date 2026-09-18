@@ -24,7 +24,7 @@
 
   // 本文の最大幅。日本語 1 行 40 字前後になる幅に揃える
   // （base.scss が min-width: 100% を当てているため両方を上書きする）
-  @media all and not ($mobile) {
+  @media all and ($desktop) {
     & .center,
     & .page-header,
     & footer {
@@ -32,6 +32,12 @@
       min-width: 0;
       width: 100%;
     }
+  }
+
+  // 1 カラムのときは、サイドバー行と本文がずれないよう入れ物ごと絞って中央に置く
+  @media all and ($mobile) {
+    max-width: 760px;
+    margin: 0 auto;
   }
 }
 
