@@ -12,6 +12,7 @@
     "node": ">=22"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "astro": "^5.14.1"
   },
   "devDependencies": {

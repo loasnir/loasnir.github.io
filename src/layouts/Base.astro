@@ -25,6 +25,7 @@ const nav = [
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {redirectTo && <meta http-equiv="refresh" content={`0; url=${redirectTo}`} />}
+    <link rel="alternate" type="application/rss+xml" title="しろへび工房" href="/index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -44,7 +45,10 @@ const nav = [
         <slot />
       </main>
       <footer class="site-footer">
-        <p>© 2026 loasnir · <a href="https://github.com/loasnir">GitHub</a></p>
+        <p>
+          © 2026 loasnir · <a href="/tags/">タグ</a> · <a href="/index.xml">RSS</a> ·{" "}
+          <a href="https://github.com/loasnir">GitHub</a>
+        </p>
       </footer>
     </div>
   </body>

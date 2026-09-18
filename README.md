@@ -19,10 +19,12 @@ Docker で動かす場合は `docker build -t loasnir-site . && docker run --rm 
 - `content/` — ページの Markdown。frontmatter は `title`（必須）・`description`・`tags`・`aliases`・`showChildren`
 - `src/pages/[...slug].astro` — 全ページのルーティング。`foo/index.md` は `/foo/` になり、そのフォルダ配下のページを一覧にする（`showChildren: false` で抑止）
 - `src/styles/site.css` — デジタル庁デザインシステムのトークンに合わせた単一スタイル
-- `astro.config.mjs` — 旧サイトの URL からのリダイレクト
+- `src/redirects.ts` — 旧サイトの URL からのリダイレクト。`[...slug].astro` がスタブページとして出す
+- `src/pages/tags/` — frontmatter の `tags` から生成するタグ一覧
+- `src/pages/index.xml.js` / `src/pages/sitemap.xml.js` — RSS と sitemap
 
 ## 幅の検収
 
-`npm run check:viewports -- <ベースURL> [--screenshots <dir>]` で 360〜1280px の 6 幅 × 全ページを横断し、記事タイトルが画面内にあるか・横スクロールの有無・本文が画面内に収まっているかを判定する（NG があれば exit 1）。
+`npm run check:viewports -- <ベースURL> [--screenshots <dir>]` で 360〜1280px の 6 幅 × 全ページ（タグページ含む）を横断し、記事タイトルが画面内にあるか・横スクロールの有無・本文が画面内に収まっているかを判定する（NG があれば exit 1）。
 初回のみ `npx playwright install chromium` でブラウザを取得する（`playwright-core` は devDependency にあるがブラウザ本体は含まない）。
 既定のベース URL は `http://localhost:8080`、本番を見るときは `https://loasnir.github.io` を渡す。
