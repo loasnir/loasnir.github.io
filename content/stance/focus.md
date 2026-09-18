@@ -23,4 +23,4 @@ tags:
 - サーバーの構築から運用・保守まで幅広く担当する。
 - ツールの開発や導入による業務の効率化を行う。
 
-関連: [[values|仕事の価値観]] / [[management-skills|マネジメントスキル詳細]] / [[tech-skills|技術スキル詳細]]
+関連: [仕事の価値観](/stance/values/) / [マネジメントスキル詳細](/skills/management-skills/) / [技術スキル詳細](/skills/tech-skills/)
